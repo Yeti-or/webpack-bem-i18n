@@ -1,6 +1,6 @@
 {
   "name": "webpack-bem-i18n",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "i18n for webpack-bem-loader",
   "main": "index.js",
   "scripts": {
