@@ -1,6 +1,6 @@
 var path = require('path');
 
-function generateI18n(langs, files) {
+function generateI18n(langs, requiredName, files) {
 
     console.assert(langs, "Choose languages for i18n");
 
@@ -14,11 +14,14 @@ function generateI18n(langs, files) {
     return files
         .reduce((acc, file) => {
             return acc.concat(langs.map(lang => strLang(file, lang)));
-        }, ['(function() {\n\tvar core = require(\'bem-i18n\');'])
+        }, [`(function() {\n\tvar core = require('${requiredName}');`])
         .concat('\treturn core;\n})();')
         .join('\n');
 }
 
 module.exports = {
-    generateI18n
+    generate : function(langs, requiredName) {
+        requiredName || (requiredName = 'bem-i18n');
+        return generateI18n.bind(null, langs, requiredName);
+    }
 };
